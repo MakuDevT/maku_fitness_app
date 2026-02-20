@@ -12,7 +12,7 @@ class BasicLayout extends StatelessWidget {
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        color: Color.fromRGBO(14, 14, 14, 1),
+        color: Color.fromRGBO(24, 24, 24, 1),
         child: SafeArea(child: child),
       ),
     );

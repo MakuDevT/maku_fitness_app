@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:maku_fitness_app/widgets/basic_layout.dart';
 import 'package:maku_fitness_app/widgets/common/ripple_effect.dart';
@@ -20,12 +21,10 @@ class _LoadingScreenState extends State<LoadingScreen>
   @override
   void initState() {
     super.initState();
-
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 950),
     );
-
     _bounceAnimation = Tween<double>(
       begin: -100,
       end: 0,
@@ -42,8 +41,16 @@ class _LoadingScreenState extends State<LoadingScreen>
         }
       }
     });
-
     _controller.repeat(reverse: true);
+    _handleNavigation();
+  }
+
+  Future<void> _handleNavigation() async {
+    Future.delayed(Duration(seconds: 5), () {
+      WidgetsBinding.instance.addPostFrameCallback((timestamp) {
+        context.go('/login');
+      });
+    });
   }
 
   @override
@@ -89,7 +96,6 @@ class _LoadingScreenState extends State<LoadingScreen>
           ),
 
           const SizedBox(height: 30),
-
           Text(
             "MAKU FITNESS",
             style: GoogleFonts.roboto(
@@ -98,9 +104,7 @@ class _LoadingScreenState extends State<LoadingScreen>
               fontSize: 24,
             ),
           ),
-
           const SizedBox(height: 10),
-
           Text(
             "Train with the physique behind the program",
             style: GoogleFonts.roboto(
